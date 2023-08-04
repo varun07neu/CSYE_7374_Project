@@ -51,6 +51,11 @@ public class Dish implements DishAPI {
 	public String getName() {
 		return name;
 	}
+	
+	@Override
+	public Dish clone() {
+		return new Dish(this.getName(), this.getPrice(), this.dishType);
+	}
 
 	public static class DishBuilder {
 		private String name;

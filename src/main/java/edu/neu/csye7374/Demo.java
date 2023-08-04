@@ -33,6 +33,18 @@ public class Demo {
 		for (DishAPI d : dishes) {
 			System.out.println(d);
 		}
+
+        DishAPI clonedSalad = salad.clone();
+        DishAPI clonedDessert = iceCream.clone();
+        
+        dishes.add(clonedDessert);
+		dishes.add(clonedSalad);
+		
+		System.out.println("------------ Adding cloned dishes -----------");
+		for (DishAPI d : dishes) {
+			System.out.println(d);
+		}
+        
 	}
 
 }

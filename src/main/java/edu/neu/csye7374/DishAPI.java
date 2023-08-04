@@ -6,4 +6,6 @@ public interface DishAPI {
 
 	double getPrice();
 
+	DishAPI clone();
+
 }
