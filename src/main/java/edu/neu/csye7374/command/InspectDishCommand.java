@@ -1,17 +1,16 @@
-package edu.neu.csye7374;
+package edu.neu.csye7374.command;
 
-public class MakeDishCommand implements KitchenCommandAPI{
-
+public class InspectDishCommand implements KitchenCommandAPI{
     public KitchenActions receiver;
 
-    public MakeDishCommand(KitchenActions rec){
+    public InspectDishCommand(KitchenActions rec){
         receiver = rec;
     }
 
     @Override
     public void exec() {
         System.out.print("Kitchen update: ");
-        receiver.makeDish();
+        receiver.inspectDish();
         System.out.println();
     }
 }
