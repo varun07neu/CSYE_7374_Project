@@ -33,4 +33,9 @@ public class ExtraRiceDecorator extends Decorator {
 	public void cook() {
 		dishAPI.cook();
 	}
+
+	@Override
+	public void serve() {
+		dishAPI.serve();
+	}
 }
