@@ -5,7 +5,24 @@ import java.util.List;
 
 public class RestaurantObservable implements ObservableAPI{
     private List<ObserverAPI> observers = new ArrayList<>();
-    String data ="THIS IS LATEST DATA";
+    String data;
+
+    public List<ObserverAPI> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<ObserverAPI> observers) {
+        this.observers = observers;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     @Override
     public void addObserver(ObserverAPI observerAPI) {
         observers.add(observerAPI);
