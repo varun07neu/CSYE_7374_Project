@@ -8,7 +8,7 @@ public class LunchDishFactory implements DishFactory {
 	private LunchDishFactory() {
 	}
 
-	synchronized static LunchDishFactory getInstance() {
+	public synchronized static LunchDishFactory getInstance() {
 		if (instance == null) {
 			instance = new LunchDishFactory();
 		}

@@ -9,7 +9,7 @@ public class DinnerDishFactory implements DishFactory {
 	private DinnerDishFactory() {
 	}
 
-	synchronized static DinnerDishFactory getInstance() {
+	public synchronized static DinnerDishFactory getInstance() {
 		return instance;
 	}
 	
