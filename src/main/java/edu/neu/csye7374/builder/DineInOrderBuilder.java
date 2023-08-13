@@ -1,6 +1,6 @@
 package edu.neu.csye7374.builder;
 
-import edu.neu.csye7374.builder.OrderBuilder;
+import edu.neu.csye7374.prototypepattern.MenuItem;
 
 public class DineInOrderBuilder implements OrderBuilder {
 

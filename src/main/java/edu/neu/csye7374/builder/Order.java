@@ -1,6 +1,9 @@
 package edu.neu.csye7374.builder;
 
+import edu.neu.csye7374.prototypepattern.MenuItem;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 
@@ -10,7 +13,7 @@ public class Order {
 
     private String customerName;
 
-    public void removeMenuItems() {
+    public void removeMenuItems(MenuItem menuItem) {
         this.menuItems.remove(menuItem);
     }
 
