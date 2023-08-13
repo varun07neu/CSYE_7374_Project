@@ -1,5 +1,7 @@
 package edu.neu.csye7374.command;
 
+import edu.neu.csye7374.factory.DishAPI;
+
 public class ServeDishCommand implements KitchenCommandAPI {
 
     public DishAPI receiver;

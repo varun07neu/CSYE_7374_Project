@@ -1,11 +1,13 @@
 package edu.neu.csye7374.singleton;
 
+import edu.neu.csye7374.builder.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager implements OrderManagerAPI{
 
-    private List<OrderAPI> orderList = new ArrayList<OrderAPI>();
+    private List<Order> orderList = new ArrayList<>();
 
     private static OrderManager instance = new OrderManager();
 
@@ -19,24 +21,24 @@ public class OrderManager implements OrderManagerAPI{
     }
 
     @Override
-    public void addNewOrder(OrderAPI order) {
+    public void addNewOrder(Order order) {
         this.orderList.add(order);
         System.out.println("Order added successfully: "+order);
     }
 
     @Override
-    public void cancelOrder(OrderAPI order) {
+    public void cancelOrder(Order order) {
         this.orderList.remove(order);
         System.out.println("Order removed successfully: "+order);
     }
 
     @Override
-    public List<OrderAPI> getOrderList() {
+    public List<Order> getOrderListFromManager() {
         return this.orderList;
     }
 
     @Override
-    public OrderAPI getOrder(int index) {
+    public Order getOrder(int index) {
         return this.orderList.get(index);
     }
 

@@ -1,5 +1,8 @@
 package edu.neu.csye7374.state;
 
+import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.strategypattern.PaymentStrategy;
+
 import java.util.List;
 
 public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
@@ -15,7 +18,7 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
     public RestaurantDelivery(){
         this.currentState = new SelectItemsState(this, dishes);
-        this.resCancel = new
+//        TODO add more states
     }
 
     public List<DishAPI> getDishes() {

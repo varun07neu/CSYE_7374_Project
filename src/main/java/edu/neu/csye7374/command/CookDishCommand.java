@@ -1,10 +1,12 @@
 package edu.neu.csye7374.command;
 
+import edu.neu.csye7374.factory.DishAPI;
+
 public class CookDishCommand implements KitchenCommandAPI{
 
     public DishAPI receiver;
 
-    public CookDishCommand(KitchenActions rec){
+    public CookDishCommand(DishAPI rec){
         receiver = rec;
     }
 
