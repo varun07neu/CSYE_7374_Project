@@ -56,6 +56,14 @@ public class LunchDish implements DishAPI {
 		System.out.println("Serving Dinner Dish " + name);
 	}
 
+	@Override
+	public String toString() {
+		return "LunchDish{" +
+				"name='" + name + '\'' +
+				", price=" + price +
+				'}';
+	}
+
 	public static class DishBuilder {
 		private String name;
 		private double price;
