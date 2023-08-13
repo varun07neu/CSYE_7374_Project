@@ -1,5 +1,5 @@
 package edu.neu.csye7374.strategypattern;
 
 public interface PaymentStrategy {
-    public void processPayment(int totalBillAmount);
+    public void processPayment(double totalBillAmount);
 }

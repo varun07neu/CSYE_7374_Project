@@ -9,6 +9,5 @@ public interface RestaurantTakeoutStateAPI {
     void selectTakeoutitems(List<DishAPI> dishes);
     void selectPaymentMethod(PaymentStrategy strat);
     void placeOrder();
-    void deliverOrder();
     void cancelOrder();
 }

@@ -2,19 +2,19 @@ package edu.neu.csye7374.strategypattern;
 
 public class OnlinePaymentStrategy implements PaymentStrategy{
 
-    int paymentAmount;
-    int tipAmount;
+    double paymentAmount;
+    double tipAmount;
 
     String onlinePlatform;
 
-    public OnlinePaymentStrategy(int paymentAmount, int tipAmount, String onlinePlatform) {
+    public OnlinePaymentStrategy(double paymentAmount, double tipAmount, String onlinePlatform) {
         this.paymentAmount = paymentAmount;
         this.tipAmount = tipAmount;
         this.onlinePlatform = onlinePlatform;
     }
 
     @Override
-    public void processPayment(int totalBillAmount) {
+    public void processPayment(double totalBillAmount) {
         System.out.println("CASH PAYMENT DETAILS");
         System.out.println("Total Bill Amount " + totalBillAmount);
         System.out.println("Tip Amount " + this.tipAmount);

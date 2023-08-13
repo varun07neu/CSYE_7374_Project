@@ -2,19 +2,19 @@ package edu.neu.csye7374.strategypattern;
 
 public class CreditCardPaymentStrategy implements PaymentStrategy{
 
-    int paymentAmount;
-    int tipAmount;
+    double paymentAmount;
+    double tipAmount;
 
     String creditCardHolderName;
 
-    public CreditCardPaymentStrategy(int paymentAmount, int tipAmount, String creditCardHolderName) {
+    public CreditCardPaymentStrategy(double paymentAmount, double tipAmount, String creditCardHolderName) {
         this.paymentAmount = paymentAmount;
         this.tipAmount = tipAmount;
         this.creditCardHolderName = creditCardHolderName;
     }
 
     @Override
-    public void processPayment(int totalBillAmount) {
+    public void processPayment(double totalBillAmount) {
         System.out.println("CASH PAYMENT DETAILS");
         System.out.println("Total Bill Amount " + totalBillAmount);
         System.out.println("Tip Amount " + this.tipAmount);

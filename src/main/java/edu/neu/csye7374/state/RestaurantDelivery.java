@@ -7,17 +7,18 @@ import java.util.List;
 
 public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
-    List<DishAPI> dishes;
+    public List<DishAPI> dishes;
+    public PaymentStrategy strategy;
+    public double orderTotal;
 
     public RestaurantTakeoutStateAPI resSelectItems;
     public RestaurantTakeoutStateAPI resSelectPayment;
     public RestaurantTakeoutStateAPI resPlaceOrder;
-    public RestaurantTakeoutStateAPI resDeliverOrder;
     public RestaurantTakeoutStateAPI resCancel;
     public RestaurantTakeoutStateAPI currentState;
 
     public RestaurantDelivery(){
-        this.currentState = new SelectItemsState(this, dishes);
+        this.currentState = new SelectItemsState(this);
 //        TODO add more states
     }
 
@@ -31,6 +32,10 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
     public RestaurantTakeoutStateAPI getResSelectItems() {
         return resSelectItems;
+    }
+
+    public void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public void setResSelectItems(RestaurantTakeoutStateAPI resSelectItems) {
@@ -53,13 +58,6 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.resPlaceOrder = resPlaceOrder;
     }
 
-    public RestaurantTakeoutStateAPI getResDeliverOrder() {
-        return resDeliverOrder;
-    }
-
-    public void setResDeliverOrder(RestaurantTakeoutStateAPI resDeliverOrder) {
-        this.resDeliverOrder = resDeliverOrder;
-    }
 
     public RestaurantTakeoutStateAPI getResCancel() {
         return resCancel;
@@ -77,6 +75,18 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.currentState = currentState;
     }
 
+    public PaymentStrategy getStrategy() {
+        return strategy;
+    }
+
+    public double getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(double orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
     @Override
     public void selectTakeoutitems(List<DishAPI> dishes) {
         this.currentState.selectTakeoutitems(dishes);
@@ -92,10 +102,6 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.currentState.placeOrder();
     }
 
-    @Override
-    public void deliverOrder() {
-        this.currentState.deliverOrder();
-    }
 
     @Override
     public void cancelOrder() {
