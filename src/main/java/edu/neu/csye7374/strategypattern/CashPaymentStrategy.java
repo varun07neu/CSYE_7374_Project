@@ -11,7 +11,7 @@ public class CashPaymentStrategy implements PaymentStrategy{
     }
 
     @Override
-    public void processPayment(int totalBillAmount) {
+    public void processPayment(double totalBillAmount) {
         System.out.println("CASH PAYMENT DETAILS");
         System.out.println("Total Bill Amount " + totalBillAmount);
         System.out.println("Tip Amount " + this.tipAmount);

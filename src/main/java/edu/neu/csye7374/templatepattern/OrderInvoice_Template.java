@@ -13,4 +13,6 @@ public abstract class OrderInvoice_Template {
         generateItems(order);
         generateTotal();
     }
+
+    public abstract double getTotal();
 }

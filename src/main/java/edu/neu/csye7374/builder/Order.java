@@ -1,6 +1,7 @@
 package edu.neu.csye7374.builder;
 
 import edu.neu.csye7374.prototypepattern.MenuItem;
+import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class Order {
     private String deliveryAddress;
 
     private String customerName;
+
+    private PaymentStrategy paymentStrategy;
 
     public void removeMenuItems(MenuItem menuItem) {
         this.menuItems.remove(menuItem);
@@ -49,5 +52,13 @@ public class Order {
                 ", deliveryAddress='" + deliveryAddress + '\'' +
                 ", customerName='" + customerName + '\'' +
                 '}';
+    }
+
+    public PaymentStrategy getPaymentStrategy() {
+        return paymentStrategy;
+    }
+
+    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
+        this.paymentStrategy = paymentStrategy;
     }
 }
