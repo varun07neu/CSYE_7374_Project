@@ -1,5 +1,9 @@
 package edu.neu.csye7374.factory;
 
+import edu.neu.csye7374.abstractfactorypattern.IngredientAbstractFactory;
+import edu.neu.csye7374.abstractfactorypattern.Sauce;
+import edu.neu.csye7374.abstractfactorypattern.StandardIngredientFactory;
+import edu.neu.csye7374.abstractfactorypattern.Vegetable;
 import edu.neu.csye7374.factory.LunchDish.DishBuilder;
 
 public class DinnerDish implements DishAPI {
@@ -8,15 +12,19 @@ public class DinnerDish implements DishAPI {
 
 	private double price;
 
+	private IngredientAbstractFactory ingredientFactory;
+
 	public DinnerDish(String name, double price) {
 		super();
 		this.name = name;
 		this.price = price;
+		this.ingredientFactory = new StandardIngredientFactory();
 	}
 	
 	public DinnerDish(DishBuilder itemBuilder) {
 		this.name = itemBuilder.name;
 		this.price = itemBuilder.price;
+		this.ingredientFactory = new StandardIngredientFactory();
 	}
 
 	public void setName(String name) {
@@ -41,10 +49,18 @@ public class DinnerDish implements DishAPI {
 		return price;
 	}
 
+	public void setIngredientFactory(IngredientAbstractFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+
 	@Override
 	public void prepare() {
 		System.out.println("Preparing Dinner Dish " + name);
-
+		System.out.println("Fetching Ingredients From Ingredient Abstract Factory");
+		Vegetable veg =  ingredientFactory.createVegetable();
+		Sauce sauce = ingredientFactory.createSauce();
+		System.out.println("Veggie used " + veg);
+		System.out.println("Sauce used " + veg);
 	}
 
 	@Override
