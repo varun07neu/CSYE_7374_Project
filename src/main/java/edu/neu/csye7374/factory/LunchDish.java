@@ -1,20 +1,28 @@
 package edu.neu.csye7374.factory;
 
+import edu.neu.csye7374.abstractfactorypattern.*;
+
+import java.sql.SQLOutput;
+
 public class LunchDish implements DishAPI {
 
 	private String name;
 
 	private double price;
 
+	private IngredientAbstractFactory ingredientFactory;
+
 	public LunchDish(String name, double price) {
 		super();
 		this.name = name;
 		this.price = price;
+		this.ingredientFactory = new StandardIngredientFactory();
 	}
 
 	public LunchDish(DishBuilder itemBuilder) {
 		this.name = itemBuilder.name;
 		this.price = itemBuilder.price;
+		this.ingredientFactory = new StandardIngredientFactory();
 	}
 
 	public void setName(String name) {
@@ -39,9 +47,18 @@ public class LunchDish implements DishAPI {
 		return price;
 	}
 
+	public void setIngredientFactory(IngredientAbstractFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+
 	@Override
 	public void prepare() {
-		System.out.println("Preparing Dinner Dish " + name);
+		System.out.println("Preparing Lunch Dish " + name);
+		System.out.println("Fetching Ingredients From Ingredient Abstract Factory");
+		Vegetable veg =  ingredientFactory.createVegetable();
+		Sauce sauce = ingredientFactory.createSauce();
+		System.out.println("Veggie used " + veg);
+		System.out.println("Sauce used " + veg);
 
 	}
 
