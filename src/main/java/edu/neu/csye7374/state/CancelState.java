@@ -1,6 +1,6 @@
 package edu.neu.csye7374.state;
 
-import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.List;
@@ -13,14 +13,13 @@ public class CancelState implements RestaurantTakeoutStateAPI{
     }
 
     @Override
-    public void selectTakeoutitems(List<DishAPI> dishes) {
+    public void selectTakeoutitems(List<MenuItem> dishes) {
         res.setCurrentState(res.getResSelectItems());
         System.out.println("Here are your items: ");
-        for (DishAPI dish :
+        for (MenuItem dish :
                 dishes) {
-            System.out.println(dish.getName());
+            System.out.println(dish.getDish());
         }
-        res.setCurrentState(res.getResSelectPayment());
     }
 
     @Override
@@ -37,6 +36,6 @@ public class CancelState implements RestaurantTakeoutStateAPI{
     @Override
     public void cancelOrder() {
         System.out.println("Order has been cancelled");
-        res.setCurrentState(res.getResSelectItems());
+        res.setDishes(null);
     }
 }

@@ -1,6 +1,6 @@
 package edu.neu.csye7374.state;
 
-import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.List;
@@ -13,34 +13,32 @@ public class SelectPaymentMethodState implements RestaurantTakeoutStateAPI{
     }
 
     @Override
-    public void selectTakeoutitems(List<DishAPI> dishes) {
-        res.setCurrentState(res.getResSelectItems());
+    public void selectTakeoutitems(List<MenuItem> dishes) {
         System.out.println("Here are your items: ");
-        for (DishAPI dish :
-                dishes) {
-            System.out.println(dish.getName());
+        for (MenuItem dish :
+                res.getDishes()) {
+            System.out.println(dish.getDish());
         }
         res.setDishes(dishes);
-        res.setCurrentState(res.getResSelectPayment());
     }
 
     @Override
     public void selectPaymentMethod(PaymentStrategy strat) {
         System.out.println("Selected payment method "+strat);
-        res.selectPaymentMethod(strat);
-        res.setCurrentState(res.getResPlaceOrder());
     }
 
     @Override
     public void placeOrder() {
-        System.out.println("Choose payment method first");
+        res.setCurrentState(res.getResPlaceOrder());
+        System.out.println("Order placed");
+        res.getStrategy().processPayment(res.getOrderTotal());
     }
 
 
     @Override
     public void cancelOrder() {
+        res.setCurrentState(res.getResCancel());
         System.out.println("Cancelling your order");
         res.setDishes(null);
-        res.setCurrentState(res.getResCancel());
     }
 }

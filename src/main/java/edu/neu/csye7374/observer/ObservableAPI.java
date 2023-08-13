@@ -4,4 +4,5 @@ public interface ObservableAPI {
     public void addObserver(ObserverAPI observerAPI);
     public void unregisterObserver(ObserverAPI observerAPI);
     public void notifyAllObservers();
+    public void setData(String data);
 }

@@ -1,5 +1,7 @@
 package edu.neu.csye7374.observer;
 
+import edu.neu.csye7374.builder.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,13 @@ public class RestaurantObservable implements ObservableAPI{
         return data;
     }
 
+    @Override
     public void setData(String data) {
         this.data = data;
+    }
+
+    public static String getMessageForOrder(Order order){
+        return "Order placed: "+order;
     }
 
     @Override

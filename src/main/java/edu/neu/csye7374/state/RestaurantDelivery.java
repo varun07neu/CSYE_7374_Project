@@ -1,13 +1,13 @@
 package edu.neu.csye7374.state;
 
-import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.List;
 
 public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
-    public List<DishAPI> dishes;
+    public List<MenuItem> dishes;
     public PaymentStrategy strategy;
     public double orderTotal;
 
@@ -18,18 +18,18 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
     public RestaurantTakeoutStateAPI currentState;
 
     public RestaurantDelivery(){
-        this.currentState = new SelectItemsState(this);
+        this.currentState = new CancelState(this);
         this.resSelectItems = new SelectItemsState(this);
         this.resSelectPayment = new SelectPaymentMethodState(this);
         this.resPlaceOrder = new PlaceOrderState(this);
         this.resCancel = new CancelState(this);
     }
 
-    public List<DishAPI> getDishes() {
+    public List<MenuItem> getDishes() {
         return dishes;
     }
 
-    public void setDishes(List<DishAPI> dishes) {
+    public void setDishes(List<MenuItem> dishes) {
         this.dishes = dishes;
     }
 
@@ -91,7 +91,7 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
     }
 
     @Override
-    public void selectTakeoutitems(List<DishAPI> dishes) {
+    public void selectTakeoutitems(List<MenuItem> dishes) {
         this.currentState.selectTakeoutitems(dishes);
     }
 

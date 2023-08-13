@@ -8,6 +8,10 @@ import edu.neu.csye7374.builder.DineInOrderBuilder;
 import edu.neu.csye7374.builder.Order;
 import edu.neu.csye7374.builder.OrderBuilder;
 import edu.neu.csye7374.builder.TakeAwayOrderBuilder;
+import edu.neu.csye7374.observer.ChefObserver;
+import edu.neu.csye7374.observer.KitchenObserver;
+import edu.neu.csye7374.observer.ObservableAPI;
+import edu.neu.csye7374.observer.RestaurantObservable;
 import edu.neu.csye7374.prototypepattern.DinnerSection;
 import edu.neu.csye7374.prototypepattern.LunchSection;
 import edu.neu.csye7374.decoratorypattern.ExtraProteinDecorator;
@@ -19,9 +23,16 @@ import edu.neu.csye7374.factory.DishAPI;
 import edu.neu.csye7374.factory.LunchDishFactory;
 import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.prototypepattern.MenuRegistry;
+import edu.neu.csye7374.state.RestaurantDelivery;
+import edu.neu.csye7374.strategypattern.CreditCardPaymentStrategy;
+import edu.neu.csye7374.strategypattern.OnlinePaymentStrategy;
+import edu.neu.csye7374.strategypattern.PaymentStrategy;
 import edu.neu.csye7374.templatepattern.DineIn_Invoice;
 import edu.neu.csye7374.templatepattern.OrderInvoice_Template;
 import edu.neu.csye7374.templatepattern.Takeout_Invoice;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Driver {
     public static void main(String[] args) throws CloneNotSupportedException {
@@ -94,6 +105,55 @@ public class Driver {
         System.out.println(teriyakiRice);
         System.out.println(kungPao);
 
+        System.out.println("------- DEMONSTRATE STATE PATTERN -------");
+
+        System.out.println("Normal Transition of state from creation of order to placing it: ");
+        RestaurantDelivery restaurantDelivery = new RestaurantDelivery();
+        OrderBuilder takeAwayOrderBuilder1 = new TakeAwayOrderBuilder();
+        takeAwayOrderBuilder.addMenuItems(dinner1);
+        takeAwayOrderBuilder.addMenuItems(dinner2);
+        takeAwayOrderBuilder.addCustomerName("Varun");
+        takeAwayOrderBuilder.addDeliveryAddress("Northeastern University Huntington Avenue");
+        Order takeawayOrder1 = takeAwayOrderBuilder1.build();
+        System.out.println(takeawayOrder1);
+        invoice = new Takeout_Invoice();
+        invoice.generateInvoice(takeawayOrder1);
+        restaurantDelivery.getCurrentState().selectTakeoutitems(takeawayOrder1.getMenuItems());
+        PaymentStrategy strat = new OnlinePaymentStrategy(50,2.0,"Apple Pay");
+        restaurantDelivery.getCurrentState().selectPaymentMethod(strat);
+        restaurantDelivery.setOrderTotal(invoice.getTotal);
+        restaurantDelivery.getCurrentState().placeOrder();
+
+        ObservableAPI restaurantObservable = new RestaurantObservable();
+        KitchenObserver kitchenObserver = new KitchenObserver();
+        ChefObserver chefObserver = new ChefObserver();
+        restaurantObservable.addObserver(kitchenObserver);
+        restaurantObservable.addObserver(chefObserver);
+        restaurantObservable.setData(RestaurantObservable.getMessageForOrder(takeawayOrder1));
+        restaurantObservable.notifyAllObservers();
+
+
+        System.out.println();
+
+        System.out.println("Unsupported Transition of state from selecting order to placing it without payment: ");
+        RestaurantDelivery restaurantDelivery2 = new RestaurantDelivery();
+        OrderBuilder takeAwayOrderBuilder2 = new TakeAwayOrderBuilder();
+        takeAwayOrderBuilder.addMenuItems(lunch3);
+        takeAwayOrderBuilder.addMenuItems(lunch2);
+        takeAwayOrderBuilder.addMenuItems(lunch1);
+        takeAwayOrderBuilder.addCustomerName("Dan");
+        takeAwayOrderBuilder.addDeliveryAddress("Northeastern University Huntington Avenue");
+        Order takeawayOrder2 = takeAwayOrderBuilder2.build();
+        System.out.println(takeawayOrder2);
+        invoice = new Takeout_Invoice();
+        restaurantDelivery2.getCurrentState().selectTakeoutitems(takeawayOrder2.getMenuItems());
+        PaymentStrategy strat2 = new CreditCardPaymentStrategy(30.0,2.0,"Chase");
+        restaurantDelivery2.getCurrentState().placeOrder();
+        restaurantDelivery2.getCurrentState().selectPaymentMethod(strat2);
+        restaurantDelivery2.getCurrentState().placeOrder();
+        invoice.generateInvoice(takeawayOrder2);
+        System.out.println();
         System.out.println("\n\n============Main Execution End===================");
+
     }
 }
