@@ -41,4 +41,13 @@ public class Order {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "menuItems=" + menuItems +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
+                ", customerName='" + customerName + '\'' +
+                '}';
+    }
 }
