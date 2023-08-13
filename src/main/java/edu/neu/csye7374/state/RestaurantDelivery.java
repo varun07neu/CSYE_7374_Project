@@ -19,7 +19,10 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
     public RestaurantDelivery(){
         this.currentState = new SelectItemsState(this);
-//        TODO add more states
+        this.resSelectItems = new SelectItemsState(this);
+        this.resSelectPayment = new SelectPaymentMethodState(this);
+        this.resPlaceOrder = new PlaceOrderState(this);
+        this.resCancel = new CancelState(this);
     }
 
     public List<DishAPI> getDishes() {
