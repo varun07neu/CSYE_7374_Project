@@ -20,7 +20,7 @@ public class Driver {
         dinner1.describe();
         dinner2.describe();
         dinner3.describe();
-        
+
         System.out.println("\n\n============Main Execution End===================");
     }
 }
