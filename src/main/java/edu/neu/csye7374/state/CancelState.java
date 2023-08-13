@@ -18,7 +18,7 @@ public class CancelState implements RestaurantTakeoutStateAPI{
         System.out.println("Here are your items: ");
         for (MenuItem dish :
                 dishes) {
-            System.out.println(dish.getDish());
+            System.out.println(dish);
         }
     }
 
@@ -29,7 +29,7 @@ public class CancelState implements RestaurantTakeoutStateAPI{
 
     @Override
     public void placeOrder() {
-        System.out.println("Order has been cancelled");
+        System.out.println("Add items to your order first");
     }
 
 

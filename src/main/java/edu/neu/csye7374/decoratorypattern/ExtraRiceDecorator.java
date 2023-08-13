@@ -29,4 +29,13 @@ public class ExtraRiceDecorator extends Decorator {
 		return "ExtraRiceDecorator [getPrice()=" + getPrice() + ", getName()=" + getName() + "]";
 	}
 
+	@Override
+	public void cook() {
+		dishAPI.cook();
+	}
+
+	@Override
+	public void serve() {
+		dishAPI.serve();
+	}
 }

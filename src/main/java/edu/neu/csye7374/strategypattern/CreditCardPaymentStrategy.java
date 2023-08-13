@@ -15,7 +15,7 @@ public class CreditCardPaymentStrategy implements PaymentStrategy{
 
     @Override
     public void processPayment(double totalBillAmount) {
-        System.out.println("CASH PAYMENT DETAILS");
+        System.out.println("CREDIT CARD PAYMENT DETAILS");
         System.out.println("Total Bill Amount " + totalBillAmount);
         System.out.println("Tip Amount " + this.tipAmount);
         System.out.println("Amount received " + this.paymentAmount);

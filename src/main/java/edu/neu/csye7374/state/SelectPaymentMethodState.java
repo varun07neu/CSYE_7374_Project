@@ -17,7 +17,7 @@ public class SelectPaymentMethodState implements RestaurantTakeoutStateAPI{
         System.out.println("Here are your items: ");
         for (MenuItem dish :
                 res.getDishes()) {
-            System.out.println(dish.getDish());
+            System.out.println(dish);
         }
         res.setDishes(dishes);
     }
@@ -30,7 +30,7 @@ public class SelectPaymentMethodState implements RestaurantTakeoutStateAPI{
     @Override
     public void placeOrder() {
         res.setCurrentState(res.getResPlaceOrder());
-        System.out.println("Order placed");
+        System.out.println("Order placed using:");
         res.getStrategy().processPayment(res.getOrderTotal());
     }
 

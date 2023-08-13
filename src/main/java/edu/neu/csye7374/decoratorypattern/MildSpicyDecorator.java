@@ -29,4 +29,13 @@ public class MildSpicyDecorator extends Decorator {
 		return "MildSpicyDecorator [getPrice()=" + getPrice() + ", getDescription()=" + getName() + "]";
 	}
 
+	@Override
+	public void cook() {
+		dishAPI.cook();
+	}
+
+	@Override
+	public void serve() {
+		dishAPI.serve();
+	}
 }

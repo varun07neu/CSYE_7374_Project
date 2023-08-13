@@ -42,6 +42,7 @@ public class RestaurantObservable implements ObservableAPI{
 
     @Override
     public void notifyAllObservers() {
+        System.out.println("Notification!");
         for(ObserverAPI ob : observers) {
             ob.notify(data);
         }

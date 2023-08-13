@@ -30,4 +30,13 @@ public class ExtraProteinDecorator extends Decorator{
 		return "ExtraProteinDecorator [getPrice()=" + getPrice() + ", getName()=" + getName() + "]";
 	}
 
+	@Override
+	public void cook() {
+		dishAPI.cook();
+	}
+
+	@Override
+	public void serve() {
+		dishAPI.serve();
+	}
 }

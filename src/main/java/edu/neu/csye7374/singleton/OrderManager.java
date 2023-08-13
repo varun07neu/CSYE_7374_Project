@@ -13,7 +13,7 @@ public class OrderManager implements OrderManagerAPI{
 
     private OrderManager() {}
 
-    static synchronized OrderManager getInstance() {
+    public static synchronized OrderManager getInstance() {
         if (instance == null) {
             instance = new OrderManager();
         }
