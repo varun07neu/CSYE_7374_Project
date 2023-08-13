@@ -30,4 +30,9 @@ public class Takeout_Invoice extends OrderInvoice_Template{
     public void generateTotal() {
         System.out.println("THE TOTAL FOR THIS INVOICE IS " + total*1.15);
     }
+
+    @Override
+    public double getTotal() {
+        return total;
+    }
 }

@@ -30,4 +30,9 @@ public class DineIn_Invoice extends OrderInvoice_Template{
     public void generateTotal() {
         System.out.println("THE TOTAL FOR THIS INVOICE IS " + total);
     }
+
+    @Override
+    public double getTotal() {
+        return total;
+    }
 }
