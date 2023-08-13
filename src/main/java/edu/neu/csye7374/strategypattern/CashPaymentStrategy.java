@@ -2,10 +2,10 @@ package edu.neu.csye7374.strategypattern;
 
 public class CashPaymentStrategy implements PaymentStrategy{
 
-    int paymentAmount;
-    int tipAmount;
+    double paymentAmount;
+    double tipAmount;
 
-    public CashPaymentStrategy(int paymentAmount, int tipAmount) {
+    public CashPaymentStrategy(double paymentAmount, double tipAmount) {
         this.paymentAmount = paymentAmount;
         this.tipAmount = tipAmount;
     }

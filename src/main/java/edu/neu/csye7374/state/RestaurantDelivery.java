@@ -1,36 +1,44 @@
 package edu.neu.csye7374.state;
 
-import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.List;
 
 public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
 
-    List<DishAPI> dishes;
+    public List<MenuItem> dishes;
+    public PaymentStrategy strategy;
+    public double orderTotal;
 
     public RestaurantTakeoutStateAPI resSelectItems;
     public RestaurantTakeoutStateAPI resSelectPayment;
     public RestaurantTakeoutStateAPI resPlaceOrder;
-    public RestaurantTakeoutStateAPI resDeliverOrder;
     public RestaurantTakeoutStateAPI resCancel;
     public RestaurantTakeoutStateAPI currentState;
 
     public RestaurantDelivery(){
-        this.currentState = new SelectItemsState(this, dishes);
-//        TODO add more states
+        this.currentState = new CancelState(this);
+        this.resSelectItems = new SelectItemsState(this);
+        this.resSelectPayment = new SelectPaymentMethodState(this);
+        this.resPlaceOrder = new PlaceOrderState(this);
+        this.resCancel = new CancelState(this);
     }
 
-    public List<DishAPI> getDishes() {
+    public List<MenuItem> getDishes() {
         return dishes;
     }
 
-    public void setDishes(List<DishAPI> dishes) {
+    public void setDishes(List<MenuItem> dishes) {
         this.dishes = dishes;
     }
 
     public RestaurantTakeoutStateAPI getResSelectItems() {
         return resSelectItems;
+    }
+
+    public void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public void setResSelectItems(RestaurantTakeoutStateAPI resSelectItems) {
@@ -53,13 +61,6 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.resPlaceOrder = resPlaceOrder;
     }
 
-    public RestaurantTakeoutStateAPI getResDeliverOrder() {
-        return resDeliverOrder;
-    }
-
-    public void setResDeliverOrder(RestaurantTakeoutStateAPI resDeliverOrder) {
-        this.resDeliverOrder = resDeliverOrder;
-    }
 
     public RestaurantTakeoutStateAPI getResCancel() {
         return resCancel;
@@ -77,8 +78,20 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.currentState = currentState;
     }
 
+    public PaymentStrategy getStrategy() {
+        return strategy;
+    }
+
+    public double getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(double orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
     @Override
-    public void selectTakeoutitems(List<DishAPI> dishes) {
+    public void selectTakeoutitems(List<MenuItem> dishes) {
         this.currentState.selectTakeoutitems(dishes);
     }
 
@@ -92,10 +105,6 @@ public class RestaurantDelivery implements RestaurantTakeoutStateAPI{
         this.currentState.placeOrder();
     }
 
-    @Override
-    public void deliverOrder() {
-        this.currentState.deliverOrder();
-    }
 
     @Override
     public void cancelOrder() {

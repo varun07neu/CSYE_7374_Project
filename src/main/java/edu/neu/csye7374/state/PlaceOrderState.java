@@ -5,35 +5,34 @@ import edu.neu.csye7374.strategypattern.PaymentStrategy;
 
 import java.util.List;
 
-public class SelectItemsState implements RestaurantTakeoutStateAPI{
+public class PlaceOrderState implements RestaurantTakeoutStateAPI{
     public RestaurantDelivery res;
 
-    public SelectItemsState(RestaurantDelivery res){
+    public PlaceOrderState(RestaurantDelivery res){
         this.res = res;
     }
 
     @Override
     public void selectTakeoutitems(List<MenuItem> dishes) {
-        System.out.println("Already in the menu ");
+       System.out.println("Order has been placed, please cancel the order if you would like to change it");
     }
 
     @Override
     public void selectPaymentMethod(PaymentStrategy strat) {
-        res.setCurrentState(res.getResSelectPayment());
-        res.setStrategy(strat);
-        System.out.println("Choose Payment type ");
+        System.out.println("Order placed");
     }
 
     @Override
     public void placeOrder() {
-        System.out.println("Choose items first");
+        System.out.println("Order placed");
     }
 
 
     @Override
     public void cancelOrder() {
-        res.setCurrentState(res.getResSelectItems());
+        res.setCurrentState(res.getResCancel());
         System.out.println("Cancelling your order");
         res.setDishes(null);
+
     }
 }
