@@ -31,6 +31,10 @@ public abstract class MenuItem implements Cloneable{
 
     }
 
+    public void setDish(DishAPI dish) {
+        this.dish = dish;
+    }
+
     public Iterator<MenuItem> getIterator() {
         return null;
     }

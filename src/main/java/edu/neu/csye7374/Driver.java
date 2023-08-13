@@ -82,10 +82,13 @@ public class Driver {
         OrderBuilder dineInOrderBuilderJohn = new DineInOrderBuilder();
         dineInOrderBuilderJohn.addCustomerName("JOHN");
         MenuItem johnMenuItem1 = (MenuItem) MenuRegistry.getMenuItem(1);
-        DishAPI johnDish = johnMenuItem1.getDish();
+        DishAPI johnDish;
+        johnDish = johnMenuItem1.getDish();
         johnDish = new ExtraProteinDecorator(johnDish);
         johnDish = new ExtraRiceDecorator(johnDish);
         johnDish = new ExtraSpicyDecorator(johnDish);
+        johnMenuItem1.setDish(johnDish);
+        System.out.println(johnDish);
         dineInOrderBuilderJohn.addMenuItems(johnMenuItem1);
 
         MenuItem johnMenuItem2 = (MenuItem) MenuRegistry.getMenuItem(2);
@@ -95,7 +98,7 @@ public class Driver {
 
         //TODO OBSERVER
 
-        KitchenCommandAPI kitchenCommandAPI = new CookDishCommand(johnDish);
+        KitchenCommandAPI kitchenCommandAPI = new CookDishCommand(johnMenuItem1.getDish());
         kitchenCommandAPI.exec();
 
         kitchenCommandAPI = new CookDishCommand(johnMenuItem2.getDish());
