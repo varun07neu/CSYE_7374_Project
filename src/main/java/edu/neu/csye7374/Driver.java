@@ -1,5 +1,8 @@
 package edu.neu.csye7374;
 
+import edu.neu.csye7374.builder.DineInOrderBuilder;
+import edu.neu.csye7374.builder.Order;
+import edu.neu.csye7374.builder.OrderBuilder;
 import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.prototypepattern.MenuRegistry;
 
@@ -20,6 +23,14 @@ public class Driver {
         dinner1.describe();
         dinner2.describe();
         dinner3.describe();
+
+        OrderBuilder dineInOrderBuilder = new DineInOrderBuilder();
+        dineInOrderBuilder.addMenuItems(lunch1);
+        dineInOrderBuilder.addMenuItems(lunch2);
+        dineInOrderBuilder.addCustomerName("Manoj");
+        Order order = dineInOrderBuilder.build();
+        System.out.println(order);
+
 
         System.out.println("\n\n============Main Execution End===================");
     }

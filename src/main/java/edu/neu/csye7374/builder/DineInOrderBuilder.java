@@ -8,6 +8,7 @@ public class DineInOrderBuilder implements OrderBuilder {
 
     public DineInOrderBuilder() {
         this.order = new Order();
+        order.setDeliveryAddress("IN HOUSE");
     }
 
     @Override
