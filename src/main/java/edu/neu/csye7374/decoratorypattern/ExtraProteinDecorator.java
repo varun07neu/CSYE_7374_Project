@@ -35,4 +35,8 @@ public class ExtraProteinDecorator extends Decorator{
 		dishAPI.cook();
 	}
 
+	@Override
+	public void serve() {
+		dishAPI.serve();
+	}
 }
