@@ -9,6 +9,14 @@ public abstract class MenuItem implements Cloneable{
     int itemNo;
     DishAPI dish;
 
+    public int getItemNo() {
+        return itemNo;
+    }
+
+    public DishAPI getDish() {
+        return dish;
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
