@@ -1,5 +1,9 @@
 package edu.neu.csye7374;
 
+import edu.neu.csye7374.adapter.DeliveryAdapter;
+import edu.neu.csye7374.adapter.DoorDashDelivery;
+import edu.neu.csye7374.adapter.DoorDashDeliveryImpl;
+import edu.neu.csye7374.adapter.InHouseDelivery;
 import edu.neu.csye7374.builder.DineInOrderBuilder;
 import edu.neu.csye7374.builder.Order;
 import edu.neu.csye7374.builder.OrderBuilder;
@@ -45,6 +49,11 @@ public class Driver {
         Order order = dineInOrderBuilder.build();
         System.out.println(order);
 
+        DoorDashDelivery doorDashDelivery = new DoorDashDeliveryImpl();
+        InHouseDelivery deliveryAdapter = new DeliveryAdapter(doorDashDelivery);
+
+        deliveryAdapter.startDelivery(order);
+        deliveryAdapter.deliver(order);
 
         System.out.println("\n\n============Main Execution End===================");
     }
