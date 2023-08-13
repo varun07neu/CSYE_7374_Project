@@ -9,6 +9,13 @@ import edu.neu.csye7374.builder.Order;
 import edu.neu.csye7374.builder.OrderBuilder;
 import edu.neu.csye7374.prototypepattern.DinnerSection;
 import edu.neu.csye7374.prototypepattern.LunchSection;
+import edu.neu.csye7374.decoratorypattern.ExtraProteinDecorator;
+import edu.neu.csye7374.decoratorypattern.ExtraRiceDecorator;
+import edu.neu.csye7374.decoratorypattern.ExtraSpicyDecorator;
+import edu.neu.csye7374.decoratorypattern.MildSpicyDecorator;
+import edu.neu.csye7374.factory.DinnerDishFactory;
+import edu.neu.csye7374.factory.DishAPI;
+import edu.neu.csye7374.factory.LunchDishFactory;
 import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.prototypepattern.MenuRegistry;
 
@@ -54,6 +61,17 @@ public class Driver {
 
         deliveryAdapter.startDelivery(order);
         deliveryAdapter.deliver(order);
+        
+        System.out.println("Created Lunch And Dinner Dishes: with decorator");
+        DishAPI kungPao = LunchDishFactory.getInstance().createDish("Kung Pao", 17);
+        DishAPI teriyakiRice = DinnerDishFactory.getInstance().createDish("Teriyaki Rice", 13);
+        
+        teriyakiRice = new ExtraRiceDecorator(teriyakiRice);
+        teriyakiRice = new ExtraSpicyDecorator(teriyakiRice);
+        teriyakiRice = new ExtraProteinDecorator(teriyakiRice);
+        kungPao = new MildSpicyDecorator(kungPao);
+        System.out.println(teriyakiRice);
+        System.out.println(kungPao);
 
         System.out.println("\n\n============Main Execution End===================");
     }
