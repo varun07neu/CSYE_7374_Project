@@ -12,6 +12,14 @@ public abstract class MenuItem implements Cloneable{
         return super.clone();
     }
 
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "itemNo=" + itemNo +
+                ", dish=" + dish +
+                '}';
+    }
+
     public abstract void describe();
 
     @Override
