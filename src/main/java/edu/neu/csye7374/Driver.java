@@ -58,13 +58,14 @@ public class Driver {
         johnDish = new ExtraRiceDecorator(johnDish);
         johnDish = new ExtraSpicyDecorator(johnDish);
         johnMenuItem1.setDish(johnDish);
-        System.out.println(johnDish);
         dineInOrderBuilderJohn.addMenuItems(johnMenuItem1);
 
         MenuItem johnMenuItem2 = (MenuItem) MenuRegistry.getMenuItem(2);
         dineInOrderBuilderJohn.addMenuItems(johnMenuItem2);
 
         Order johnOrder = dineInOrderBuilderJohn.build();
+        System.out.println("----Order Placed for John-----");
+        System.out.println(johnOrder);
 
         //Notify kitchen and chefs
         restaurantObservable.setData(RestaurantObservable.getMessageForOrder(johnOrder));
@@ -110,8 +111,8 @@ public class Driver {
         Takeout_Invoice invoice = new Takeout_Invoice();
         invoice.generateInvoice(takeawayOrder1);
         restaurantDelivery.getCurrentState().selectTakeoutitems(takeawayOrder1.getMenuItems());
-        PaymentStrategy strat = new OnlinePaymentStrategy(50,2.0,"Apple Pay");
-        restaurantDelivery.getCurrentState().selectPaymentMethod(strat);
+        PaymentStrategy strategy = new OnlinePaymentStrategy(50,2.0,"Apple Pay");
+        restaurantDelivery.getCurrentState().selectPaymentMethod(strategy);
         restaurantDelivery.setOrderTotal(invoice.getTotal());
         restaurantDelivery.getCurrentState().placeOrder();
 

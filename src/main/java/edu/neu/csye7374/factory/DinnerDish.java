@@ -20,7 +20,7 @@ public class DinnerDish implements DishAPI {
 		this.price = price;
 		this.ingredientFactory = new StandardIngredientFactory();
 	}
-	
+
 	public DinnerDish(DishBuilder itemBuilder) {
 		this.name = itemBuilder.name;
 		this.price = itemBuilder.price;
@@ -57,7 +57,7 @@ public class DinnerDish implements DishAPI {
 	public void prepare() {
 		System.out.println("Preparing Dinner Dish " + name);
 		System.out.println("Fetching Ingredients From Ingredient Abstract Factory");
-		Vegetable veg =  ingredientFactory.createVegetable();
+		Vegetable veg = ingredientFactory.createVegetable();
 		Sauce sauce = ingredientFactory.createSauce();
 		System.out.println("Veggie used " + veg);
 		System.out.println("Sauce used " + veg);
@@ -72,6 +72,11 @@ public class DinnerDish implements DishAPI {
 	@Override
 	public void serve() {
 		System.out.println("Serving Dinner Dish " + name);
+	}
+	
+	@Override
+	public String toString() {
+		return "DinnerDish [name=" + name + ", price=" + price + ", ingredientFactory=" + ingredientFactory + "]";
 	}
 
 	public static class DishBuilder {
@@ -107,4 +112,5 @@ public class DinnerDish implements DishAPI {
 		}
 
 	}
+
 }
