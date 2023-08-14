@@ -13,4 +13,9 @@ public class HotSauce extends Sauce{
     public String displayProperties() {
          return this.name + " calories per serving " + this.caloriesPerServing;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

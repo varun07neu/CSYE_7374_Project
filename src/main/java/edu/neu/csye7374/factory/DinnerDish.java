@@ -60,11 +60,12 @@ public class DinnerDish implements DishAPI {
 		Vegetable veg = ingredientFactory.createVegetable();
 		Sauce sauce = ingredientFactory.createSauce();
 		System.out.println("Veggie used " + veg);
-		System.out.println("Sauce used " + veg);
+		System.out.println("Sauce used " + sauce);
 	}
 
 	@Override
 	public void cook() {
+		prepare();
 		System.out.println("Cooking Dinner Dish " + name);
 
 	}
@@ -76,8 +77,13 @@ public class DinnerDish implements DishAPI {
 	
 	@Override
 	public String toString() {
-		return "DinnerDish [name=" + name + ", price=" + price + ", ingredientFactory=" + ingredientFactory + "]";
+		return "DinnerDish{" +
+				"name='" + name + '\'' +
+				", price=" + price +
+				'}';
 	}
+
+
 
 	public static class DishBuilder {
 		private String name;
