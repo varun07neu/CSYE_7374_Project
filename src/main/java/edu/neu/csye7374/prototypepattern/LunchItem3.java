@@ -11,6 +11,6 @@ public class LunchItem3 extends MenuItem{
 
     @Override
     public void describe() {
-        System.out.println("This is Lunch item 3");
+        System.out.println("This is Lunch item 3 - " + this.dish);
     }
 }

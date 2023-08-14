@@ -12,4 +12,9 @@ public class RedPepper extends Vegetable{
     public String displayProperties() {
         return name + " calories per serving " + this.caloriesPerServing;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

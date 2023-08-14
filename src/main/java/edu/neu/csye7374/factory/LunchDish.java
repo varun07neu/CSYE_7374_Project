@@ -58,13 +58,14 @@ public class LunchDish implements DishAPI {
 		Vegetable veg =  ingredientFactory.createVegetable();
 		Sauce sauce = ingredientFactory.createSauce();
 		System.out.println("Veggie used " + veg);
-		System.out.println("Sauce used " + veg);
+		System.out.println("Sauce used " + sauce);
 
 	}
 
 	@Override
 	public void cook() {
-		System.out.println("Cooking Dinner Dish " + name);
+		prepare();
+		System.out.println("Cooking Lunch Dish " + name);
 
 	}
 

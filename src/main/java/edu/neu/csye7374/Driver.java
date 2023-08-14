@@ -41,18 +41,47 @@ public class Driver {
     public static void main(String[] args) throws CloneNotSupportedException {
         System.out.println("============Main Execution Start===================\n\n");
 
-        //Creating observers
-        ObservableAPI restaurantObservable = new RestaurantObservable();
-        KitchenObserver kitchenObserver = new KitchenObserver();
-        ChefObserver chefObserver = new ChefObserver();
-        restaurantObservable.addObserver(kitchenObserver);
-        restaurantObservable.addObserver(chefObserver);
+        System.out.println("------- DEMONSTRATE PROTOTYPE PATTERN & FACTORY METHOD PATTERN -------");
+        MenuItem lunch1 = (MenuItem) MenuRegistry.getMenuItem(1);
+        MenuItem lunch2 = (MenuItem) MenuRegistry.getMenuItem(2);
+        MenuItem lunch3 = (MenuItem) MenuRegistry.getMenuItem(3);
+        MenuItem dinner1 = (MenuItem) MenuRegistry.getMenuItem(4);
+        MenuItem dinner2 = (MenuItem) MenuRegistry.getMenuItem(5);
+        MenuItem dinner3 = (MenuItem) MenuRegistry.getMenuItem(6);
+        lunch1.describe();
+        lunch2.describe();
+        lunch3.describe();
+        dinner1.describe();
+        dinner2.describe();
+        dinner3.describe();
+        System.out.println();
+
+        System.out.println("------- DEMONSTRATE COMPOSITE PATTERN -------");
+        MenuItem lunchSection = new LunchSection();
+        lunchSection.addMenuItem(lunch1);
+        lunchSection.addMenuItem(lunch2);
+        lunchSection.addMenuItem(lunch3);
+        lunchSection.describe();
+        MenuItem dinnerSection = new DinnerSection();
+        dinnerSection.addMenuItem(lunch1);
+        dinnerSection.addMenuItem(lunch2);
+        dinnerSection.addMenuItem(lunch3);
+        dinnerSection.describe();
+        System.out.println();
+
+        System.out.println("------- DEMONSTRATE SINGLETON PATTERN -------");
+        OrderManagerAPI orderManagerAPI = OrderManager.getInstance();
+        System.out.println("Created a SINGLE INSTANCE of " + OrderManagerAPI.class + "\n");
+
 
         // Creating the order for JOHN
+        System.out.println("------- DEMONSTRATE BUILDER PATTERN & DECORATOR PATTERN -------");
         OrderBuilder dineInOrderBuilderJohn = new DineInOrderBuilder();
+        System.out.println("Start BUILDING of Order for JOHN");
         dineInOrderBuilderJohn.addCustomerName("JOHN");
         MenuItem johnMenuItem1 = (MenuItem) MenuRegistry.getMenuItem(1);
         DishAPI johnDish;
+        System.out.println("DECORATE Item 1 of Order for JOHN");
         johnDish = johnMenuItem1.getDish();
         johnDish = new ExtraProteinDecorator(johnDish);
         johnDish = new ExtraRiceDecorator(johnDish);
@@ -64,14 +93,22 @@ public class Driver {
         dineInOrderBuilderJohn.addMenuItems(johnMenuItem2);
 
         Order johnOrder = dineInOrderBuilderJohn.build();
-        System.out.println("----Order Placed for John-----");
-        System.out.println(johnOrder);
+        System.out.println("Order BUILT for JOHN");
+        System.out.println(johnOrder + "\n");
 
+        System.out.println("------- DEMONSTRATE OBSERVER PATTERN -------");
         //Notify kitchen and chefs
+        //Creating observers
+        ObservableAPI restaurantObservable = new RestaurantObservable();
+        KitchenObserver kitchenObserver = new KitchenObserver();
+        ChefObserver chefObserver = new ChefObserver();
+        restaurantObservable.addObserver(kitchenObserver);
+        restaurantObservable.addObserver(chefObserver);
         restaurantObservable.setData(RestaurantObservable.getMessageForOrder(johnOrder));
         restaurantObservable.notifyAllObservers();
+        System.out.println();
 
-        //TODO OBSERVER
+        System.out.println("------- DEMONSTRATE COMMAND & ABSTRACT FACTORY METHOD PATTERN -------");
 
         KitchenCommandAPI kitchenCommandAPI = new CookDishCommand(johnMenuItem1.getDish());
         kitchenCommandAPI.exec();
@@ -79,23 +116,28 @@ public class Driver {
         kitchenCommandAPI = new CookDishCommand(johnMenuItem2.getDish());
         kitchenCommandAPI.exec();
 
-        kitchenCommandAPI = new ServeDishCommand(johnDish);
+        kitchenCommandAPI = new ServeDishCommand(johnMenuItem1.getDish());
         kitchenCommandAPI.exec();
 
         kitchenCommandAPI = new ServeDishCommand(johnMenuItem2.getDish());
         kitchenCommandAPI.exec();
 
+        System.out.println("------- DEMONSTRATE TEMPLATE PATTERN -------");
         OrderInvoice_Template orderInvoiceTemplate = new DineIn_Invoice();
         orderInvoiceTemplate.generateInvoice(johnOrder);
+        System.out.println();
 
+        System.out.println("------- DEMONSTRATE STRATEGY PATTERN -------");
         johnOrder.setPaymentStrategy(new CreditCardPaymentStrategy(100, 10, "JOHN"));
         johnOrder.getPaymentStrategy().processPayment(orderInvoiceTemplate.getTotal());
+        System.out.println();
 
-        InHouseDelivery inHouseDelivery = new InHouseDeliveryImpl();
+        System.out.println("------- DEMONSTRATE ADAPTER PATTERN -------");
+        InHouseDelivery inHouseDelivery = new DeliveryAdapter(new DoorDashDeliveryImpl());
         inHouseDelivery.startDelivery(johnOrder);
         inHouseDelivery.deliver(johnOrder);
+        System.out.println();
 
-        OrderManagerAPI orderManagerAPI = OrderManager.getInstance();
         orderManagerAPI.addNewOrder(johnOrder);
 
         System.out.println("------- DEMONSTRATE STATE PATTERN -------");
