@@ -74,3 +74,9 @@ Members:
 - `SelectPaymentMethodState` is the class that supports state transition into PlaceOrderState and processes the payment for the order
 - `PlaceOrderState` is the class that supports state transition into CancelState and closes out the order
 - `CancelState` is the initial state and also enables clearing out the dishes in the order
+
+### Observer Pattern
+- `ObserverAPI` is an interface that the Observers implement to be able to notify users of the set message
+- `ObservableAPI` is an interface that the RestaurantObservable implements
+- `RestaurantObservable` adds/notify/remove observers and set message for notifying users
+- `KitchenObserver, ChefObserverAPI` observers participate in the app to notify the kitchen and chefs of any new orders
