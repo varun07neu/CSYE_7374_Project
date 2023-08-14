@@ -24,9 +24,7 @@ import edu.neu.csye7374.factory.LunchDishFactory;
 import edu.neu.csye7374.prototypepattern.MenuItem;
 import edu.neu.csye7374.prototypepattern.MenuRegistry;
 import edu.neu.csye7374.state.RestaurantDelivery;
-import edu.neu.csye7374.strategypattern.CreditCardPaymentStrategy;
-import edu.neu.csye7374.strategypattern.OnlinePaymentStrategy;
-import edu.neu.csye7374.strategypattern.PaymentStrategy;
+import edu.neu.csye7374.strategypattern.*;
 import edu.neu.csye7374.singleton.OrderManager;
 import edu.neu.csye7374.singleton.OrderManagerAPI;
 import edu.neu.csye7374.strategypattern.CreditCardPaymentStrategy;
@@ -74,7 +72,7 @@ public class Driver {
         System.out.println("Created a SINGLE INSTANCE of " + OrderManagerAPI.class + "\n");
 
 
-        // Creating the order for JOHN
+        System.out.println("****************************** CREATING DINE IN LUNCH ORDER FOR JOHN ******************************");
         System.out.println("------- DEMONSTRATE BUILDER PATTERN & DECORATOR PATTERN -------");
         OrderBuilder dineInOrderBuilderJohn = new DineInOrderBuilder();
         System.out.println("Start BUILDING of Order for JOHN");
@@ -133,7 +131,7 @@ public class Driver {
         System.out.println();
 
         System.out.println("------- DEMONSTRATE ADAPTER PATTERN -------");
-        InHouseDelivery inHouseDelivery = new DeliveryAdapter(new DoorDashDeliveryImpl());
+        InHouseDelivery inHouseDelivery = new InHouseDeliveryImpl();
         inHouseDelivery.startDelivery(johnOrder);
         inHouseDelivery.deliver(johnOrder);
         System.out.println();
@@ -161,6 +159,64 @@ public class Driver {
        //Notify kitchen and chefs
         restaurantObservable.setData(RestaurantObservable.getMessageForOrder(takeawayOrder1));
         restaurantObservable.notifyAllObservers();
+        System.out.println();
+
+        System.out.println("****************************** CREATING TAKEOUT DINNER ORDER FOR MARK ******************************");
+        System.out.println("------- DEMONSTRATE BUILDER PATTERN & DECORATOR PATTERN -------");
+        OrderBuilder takeAwayOrderBuilderMark = new TakeAwayOrderBuilder();
+        System.out.println("Start BUILDING of Order for MARK");
+        takeAwayOrderBuilderMark.addCustomerName("MARK");
+        takeAwayOrderBuilderMark.addDeliveryAddress("Northeastern University, Huntington Avenue");
+        MenuItem markMenuItem1 = (MenuItem) MenuRegistry.getMenuItem(4);
+        DishAPI markDish;
+        System.out.println("DECORATE Item 1 of Order for MARK");
+        markDish = markMenuItem1.getDish();
+        markDish = new ExtraProteinDecorator(markDish);
+        markDish = new ExtraRiceDecorator(markDish);
+        markMenuItem1.setDish(markDish);
+        takeAwayOrderBuilderMark.addMenuItems(markMenuItem1);
+
+        MenuItem markMenuItem2 = (MenuItem) MenuRegistry.getMenuItem(5);
+        takeAwayOrderBuilderMark.addMenuItems(markMenuItem2);
+
+        Order markOrder = takeAwayOrderBuilderMark.build();
+        System.out.println("Order BUILT for MARK");
+                System.out.println(markOrder + "\n");
+
+        System.out.println("------- DEMONSTRATE OBSERVER PATTERN -------");
+        //Notify kitchen and chefs
+        restaurantObservable.setData(RestaurantObservable.getMessageForOrder(markOrder));
+        restaurantObservable.notifyAllObservers();
+        System.out.println();
+
+        System.out.println("------- DEMONSTRATE COMMAND & ABSTRACT FACTORY METHOD PATTERN -------");
+
+        kitchenCommandAPI = new CookDishCommand(markMenuItem1.getDish());
+        kitchenCommandAPI.exec();
+
+        kitchenCommandAPI = new CookDishCommand(markMenuItem2.getDish());
+        kitchenCommandAPI.exec();
+
+        kitchenCommandAPI = new ServeDishCommand(markMenuItem1.getDish());
+        kitchenCommandAPI.exec();
+
+        kitchenCommandAPI = new ServeDishCommand(markMenuItem2.getDish());
+        kitchenCommandAPI.exec();
+
+        System.out.println("------- DEMONSTRATE TEMPLATE PATTERN -------");
+        orderInvoiceTemplate = new Takeout_Invoice();
+        orderInvoiceTemplate.generateInvoice(markOrder);
+        System.out.println();
+
+        System.out.println("------- DEMONSTRATE STRATEGY PATTERN -------");
+        markOrder.setPaymentStrategy(new CashPaymentStrategy(100, 10));
+        markOrder.getPaymentStrategy().processPayment(orderInvoiceTemplate.getTotal());
+        System.out.println();
+
+        System.out.println("------- DEMONSTRATE ADAPTER PATTERN -------");
+        inHouseDelivery = new DeliveryAdapter(new DoorDashDeliveryImpl());
+        inHouseDelivery.startDelivery(markOrder);
+        inHouseDelivery.deliver(markOrder);
         System.out.println();
 
         //Case 2: Uncomment if needed
