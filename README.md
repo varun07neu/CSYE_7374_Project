@@ -66,3 +66,11 @@ Members:
 - `OrderInvoice_Template` is an interface that has the primitive steps to generate an Order Invoice
 - `DineIn_Invoice` is used to generate Dine In Invoices
 - `TakeOut_Invoice` is used to generate Take Out Invoices
+
+### State Pattern
+- `RestaurantTakeoutStateAPI` is an interface that has the state transition methods that other concrete state classes will implement
+- `RestaurantDelivery` is the class that sets the initial state and holds the initial state transition into SelectItemsState and sets the MenuItem objects for the order
+- `SelectItemsState` is the class that supports state transition into SelectPaymentMethodState and sets the payment strategy
+- `SelectPaymentMethodState` is the class that supports state transition into PlaceOrderState and processes the payment for the order
+- `PlaceOrderState` is the class that supports state transition into CancelState and closes out the order
+- `CancelState` is the initial state and also enables clearing out the dishes in the order
