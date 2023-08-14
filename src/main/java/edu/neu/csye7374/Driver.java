@@ -54,6 +54,7 @@ public class Driver {
 			"---Created RestaurantDelivery is the class that sets the initial state and holds the initial state transition into the selected state",
 			"---Displayed output properly",
 			"---Missed an eager singleton factory class. Fixed it. Created all objects using singleton factory classes",
+			"---Implemented Observer Pattern. Added ObservableAPI and RestaurantObservable to add/remove/notify observers. Added ObserverAPI, KitchenObserver and ChefObserver to participate as observers and receive notifications in the application",
 			"---Cleaned the code", "---LEAVE THIS AS END OF DEVELOPMENT LOG STRINGS" };
 	public static final int MINOR_REVISION = LOG.length;
 
@@ -90,9 +91,9 @@ public class Driver {
 		lunchSection.addMenuItem(lunch3);
 		lunchSection.describe();
 		MenuItem dinnerSection = new DinnerSection();
-		dinnerSection.addMenuItem(lunch1);
-		dinnerSection.addMenuItem(lunch2);
-		dinnerSection.addMenuItem(lunch3);
+		dinnerSection.addMenuItem(dinner1);
+		dinnerSection.addMenuItem(dinner2);
+		dinnerSection.addMenuItem(dinner3);
 		dinnerSection.describe();
 		System.out.println();
 
