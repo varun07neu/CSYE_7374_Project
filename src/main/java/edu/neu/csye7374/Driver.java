@@ -61,9 +61,9 @@ public class Driver {
         lunchSection.addMenuItem(lunch3);
         lunchSection.describe();
         MenuItem dinnerSection = new DinnerSection();
-        dinnerSection.addMenuItem(lunch1);
-        dinnerSection.addMenuItem(lunch2);
-        dinnerSection.addMenuItem(lunch3);
+        dinnerSection.addMenuItem(dinner1);
+        dinnerSection.addMenuItem(dinner2);
+        dinnerSection.addMenuItem(dinner3);
         dinnerSection.describe();
         System.out.println();
 
